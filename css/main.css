@@ -28,9 +28,9 @@ h6:hover > .anchorjs-link {
   -webkit-backface-visibility: hidden;
   transition: transform 0.05s ease-out;
 }
-@media (max-width: 100vh) {
+@media (max-width: 125vh) {
   .header-inner {
-    max-height: 100vw;
+    max-height: 80vw;
   }
   #board {
     margin-top: -1rem !important;
@@ -430,10 +430,21 @@ sup > a::before,
   -o-transform: rotate(-135deg);
   transform: rotate(-135deg);
 }
-.navbar .dropdown-collapse,
-.top-nav-collapse,
-.navbar-col-show {
-  background-color: var(--navbar-bg-color);
+@supports (-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px)) {
+  .navbar .dropdown-collapse,
+  .top-nav-collapse,
+  .navbar-col-show {
+    background: rgba(8,19,34,0.72);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+@supports not ((-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px))) {
+  .navbar .dropdown-collapse,
+  .top-nav-collapse,
+  .navbar-col-show {
+    background: #081322;
+  }
 }
 @media (max-width: 767px) {
   .navbar {
@@ -480,7 +491,20 @@ sup > a::before,
   transform: translateY(-12px);
   transition: opacity 0.18s ease, transform 0.18s ease;
   will-change: opacity, transform;
-  background-color: var(--navbar-bg-color);
+/* 若浏览器支持 backdrop-filter，则启用毛玻璃 */
+/* 若浏览器器不支持，则使用透明 */
+}
+@supports (-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px)) {
+  #mobile-grid-menu {
+    background: rgba(8,19,34,0.72);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+@supports not ((-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px))) {
+  #mobile-grid-menu {
+    background: #081322;
+  }
 }
 #mobile-grid-menu.show {
   pointer-events: auto;
@@ -657,10 +681,10 @@ sup > a::before,
 }
 #nprogress .bar {
   height: 3px !important;
-  background-color: #29d !important;
+  background-color: #22d3ee !important;
 }
 #nprogress .peg {
-  box-shadow: 0 0 14px #29d, 0 0 8px #29d !important;
+  box-shadow: 0 0 14px #22d3ee, 0 0 8px #22d3ee !important;
 }
 @media (max-width: 575px) {
   #nprogress .bar {
@@ -895,7 +919,7 @@ html {
 html,
 body {
   height: 100%;
-  font-family: var(--font-family-sans-serif);
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","Microsoft YaHei",Arial,sans-serif;
   overflow-wrap: break-word;
 }
 body {
@@ -961,59 +985,75 @@ body.mobile-menu-open {
 }
 :root {
   --color-mode: "light";
-  --body-bg-color: #eee;
-  --board-bg-color: #fff;
-  --text-color: #3c4858;
-  --sec-text-color: #718096;
-  --post-text-color: #2c3e50;
-  --post-heading-color: #1a202c;
-  --post-link-color: #0366d6;
-  --link-hover-color: #30a9de;
-  --link-hover-bg-color: #f8f9fa;
-  --line-color: #eaecef;
-  --navbar-bg-color: #2f4154;
-  --navbar-text-color: #fff;
-  --subtitle-color: #fff;
-  --scrollbar-color: #c4c6c9;
-  --scrollbar-hover-color: #a6a6a6;
+  --body-bg-color: #eef5ff;
+  --board-bg-color: rgba(255, 255, 255, 0.84);
+  --text-color: #253142;
+  --sec-text-color: #64748b;
+  --post-text-color: #263447;
+  --post-heading-color: #0f172a;
+  --post-link-color: #0077ff;
+  --link-hover-color: #7c3aed;
+  --link-hover-bg-color: #eaf7ff;
+  --line-color: #d9e3ee;
+  --navbar-bg-color: rgba(8, 19, 34, 0.78);
+  --navbar-text-color: #f8fbff;
+  --subtitle-color: #f2fdff;
+  --scrollbar-color: #9fb2c7;
+  --scrollbar-hover-color: #5d738d;
   --button-bg-color: transparent;
-  --button-hover-bg-color: #f2f3f5;
-  --highlight-bg-color: #f6f8fa;
+  --button-hover-bg-color: #e6f6f8;
+  --highlight-bg-color: #fafafa;
   --inlinecode-bg-color: rgba(175,184,193,0.2);
-  --fold-title-color: #3c4858;
-  --fold-border-color: #eaecef;
+  --fold-title-color: #253142;
+  --fold-border-color: #d9e3ee;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --color-mode: "dark";
   }
   :root:not([data-user-color-scheme]) {
-    --body-bg-color: #181c27;
-    --board-bg-color: #252d38;
-    --text-color: #c4c6c9;
-    --sec-text-color: #a7a9ad;
-    --post-text-color: #c4c6c9;
-    --post-heading-color: #c4c6c9;
-    --post-link-color: #1589e9;
-    --link-hover-color: #30a9de;
-    --link-hover-bg-color: #364151;
-    --line-color: #435266;
-    --navbar-bg-color: #1f3144;
-    --navbar-text-color: #d0d0d0;
-    --subtitle-color: #d0d0d0;
-    --scrollbar-color: #687582;
-    --scrollbar-hover-color: #9da8b3;
+    --body-bg-color: #050816;
+    --board-bg-color: rgba(9, 18, 36, 0.84);
+    --text-color: #d6dde8;
+    --sec-text-color: #94a3b8;
+    --post-text-color: #d9e2ee;
+    --post-heading-color: #f2f7fb;
+    --post-link-color: #67e8f9;
+    --link-hover-color: #c4b5fd;
+    --link-hover-bg-color: #101d3c;
+    --line-color: #2c3c52;
+    --navbar-bg-color: rgba(4, 8, 18, 0.78);
+    --navbar-text-color: #d7e4f2;
+    --subtitle-color: #d7fbff;
+    --scrollbar-color: #52677f;
+    --scrollbar-hover-color: #8ca3bb;
     --button-bg-color: transparent;
-    --button-hover-bg-color: #46647e;
-    --highlight-bg-color: #303030;
+    --button-hover-bg-color: #213a4d;
+    --highlight-bg-color: #282c34;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
-    --fold-title-color: #c4c6c9;
-    --fold-border-color: #435266;
+    --fold-title-color: #d6dde8;
+    --fold-border-color: #2c3c52;
   }
   :root:not([data-user-color-scheme]) img {
     -webkit-filter: brightness(0.9);
     filter: brightness(0.9);
     transition: filter 0.2s ease-in-out;
+  }
+  @supports (-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px)) {
+    :root:not([data-user-color-scheme]) .navbar .dropdown-collapse,
+    :root:not([data-user-color-scheme]) .top-nav-collapse,
+    :root:not([data-user-color-scheme]) .navbar-col-show {
+      background: rgba(4,8,18,0.72);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+  }
+  @supports not ((-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px))) {
+    :root:not([data-user-color-scheme]) .navbar .dropdown-collapse,
+    :root:not([data-user-color-scheme]) .top-nav-collapse,
+    :root:not([data-user-color-scheme]) .navbar-col-show {
+      background: #040812;
+    }
   }
   :root:not([data-user-color-scheme]) .license-box {
     background-color: rgba(62,75,94,0.35);
@@ -1026,32 +1066,48 @@ body.mobile-menu-open {
 }
 @media not print {
   [data-user-color-scheme="dark"] {
-    --body-bg-color: #181c27;
-    --board-bg-color: #252d38;
-    --text-color: #c4c6c9;
-    --sec-text-color: #a7a9ad;
-    --post-text-color: #c4c6c9;
-    --post-heading-color: #c4c6c9;
-    --post-link-color: #1589e9;
-    --link-hover-color: #30a9de;
-    --link-hover-bg-color: #364151;
-    --line-color: #435266;
-    --navbar-bg-color: #1f3144;
-    --navbar-text-color: #d0d0d0;
-    --subtitle-color: #d0d0d0;
-    --scrollbar-color: #687582;
-    --scrollbar-hover-color: #9da8b3;
+    --body-bg-color: #050816;
+    --board-bg-color: rgba(9, 18, 36, 0.84);
+    --text-color: #d6dde8;
+    --sec-text-color: #94a3b8;
+    --post-text-color: #d9e2ee;
+    --post-heading-color: #f2f7fb;
+    --post-link-color: #67e8f9;
+    --link-hover-color: #c4b5fd;
+    --link-hover-bg-color: #101d3c;
+    --line-color: #2c3c52;
+    --navbar-bg-color: rgba(4, 8, 18, 0.78);
+    --navbar-text-color: #d7e4f2;
+    --subtitle-color: #d7fbff;
+    --scrollbar-color: #52677f;
+    --scrollbar-hover-color: #8ca3bb;
     --button-bg-color: transparent;
-    --button-hover-bg-color: #46647e;
-    --highlight-bg-color: #303030;
+    --button-hover-bg-color: #213a4d;
+    --highlight-bg-color: #282c34;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
-    --fold-title-color: #c4c6c9;
-    --fold-border-color: #435266;
+    --fold-title-color: #d6dde8;
+    --fold-border-color: #2c3c52;
   }
   [data-user-color-scheme="dark"] img {
     -webkit-filter: brightness(0.9);
     filter: brightness(0.9);
     transition: filter 0.2s ease-in-out;
+  }
+  @supports (-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px)) {
+    [data-user-color-scheme="dark"] .navbar .dropdown-collapse,
+    [data-user-color-scheme="dark"] .top-nav-collapse,
+    [data-user-color-scheme="dark"] .navbar-col-show {
+      background: rgba(4,8,18,0.72);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+  }
+  @supports not ((-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px))) {
+    [data-user-color-scheme="dark"] .navbar .dropdown-collapse,
+    [data-user-color-scheme="dark"] .top-nav-collapse,
+    [data-user-color-scheme="dark"] .navbar-col-show {
+      background: #040812;
+    }
   }
   [data-user-color-scheme="dark"] .license-box {
     background-color: rgba(62,75,94,0.35);
@@ -1559,7 +1615,7 @@ figure.highlight td.code > pre {
 .markdown-body {
   font-size: 1rem;
   line-height: 1.6;
-  font-family: var(--font-family-sans-serif);
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","Microsoft YaHei",Arial,sans-serif;
   margin-bottom: 2rem;
   color: var(--post-text-color);
 }
@@ -1625,7 +1681,7 @@ figure.highlight td.code > pre {
   transition: border-color 0.2s ease-in-out;
 }
 .markdown-body pre {
-  font-size: 85% !important;
+  font-size: 86% !important;
 }
 .markdown-body pre .mermaid {
   text-align: center;
